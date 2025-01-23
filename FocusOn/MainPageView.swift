@@ -89,7 +89,7 @@ struct MainPageView: View {
                                 .fontWeight(.bold)
                         }
                         Button(action: {
-                            showPomodoroInfo = true
+                            showOtherInfo = true
                         }) {
                             Image(systemName: "info.circle.fill") // ℹ️ Icon
                                 .resizable() // Allows resizing
