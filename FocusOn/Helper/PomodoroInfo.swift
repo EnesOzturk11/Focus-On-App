@@ -17,10 +17,10 @@ struct PomodoroInfo: View {
             ZStack {
                 Rectangle()
                     .fill(Color.white)
-                    .frame(width: 300, height: 110)
+                    .frame(width: 350, height: 350)
                     .cornerRadius(35)
                     .shadow(color: Color.black.opacity(1.0), radius: 40)
-                    .overlay(Text("This is pomodoro method").font(.title2).padding(.horizontal, 3.0))
+                    .overlay(Text("The Pomodoro Technique boosts productivity by breaking work into 25-minute focused sessions (Pomodoros) followed by 5-minute breaks, with a longer break after every four Pomodoros. It enhances focus, reduces distractions, and prevents burnout.").font(.title2).multilineTextAlignment(.center).padding(.horizontal, 3.0))
                                         
                     }
             .offset(y: -120)

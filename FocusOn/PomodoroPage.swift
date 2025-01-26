@@ -14,7 +14,9 @@ struct PomodoroPage: View {
     @State var minute=25
     @State var second=0
     @State private var timerRunning = false
-    @State var angleOfProgress = -90
+    @State var angleOfProgress: Double = -90
+    @State var progressDuration = 25
+    @State var isBreak = false
     
     var body: some View {
         ZStack {
@@ -47,7 +49,7 @@ struct PomodoroPage: View {
                                 aPath.move(to: CGPoint(x:160, y:160))
                                 aPath.addArc(center: CGPoint(x:160, y:160), radius: 160, startAngle: Angle(degrees: -90), endAngle: Angle(degrees: Double(angleOfProgress)), clockwise: false)
                             }
-                            .fill(Color.cyan)
+                            .fill(isBreak ? Color.green : Color.cyan)
                         }
                     
                     Circle()
@@ -90,24 +92,36 @@ struct PomodoroPage: View {
     
     
     func startTimer() {
-            timer?.invalidate()  // Önceki timer varsa durdur
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                DispatchQueue.main.async {
-                    withAnimation(.linear(duration: 0.1)) {
-                                    angleOfProgress += 360 / (25 * 60)
-                                    angleOfProgress = min(angleOfProgress, 360)
-                                }
-                    if minute == 0 && second == 0 {
-                        completePomodoro()
-                    } else if second > 0 {
-                        second -= 1
-                    } else {
-                        minute -= 1
-                        second = 59
+        timer?.invalidate()  // Stop any existing timer
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            DispatchQueue.main.async {
+                let totalTime = progressDuration * 60  // Total duration in seconds
+                let timeElapsed = ((progressDuration * 60) - ((minute * 60) + second))
+                let progress = Double(timeElapsed) / Double(totalTime)
+
+                // Animate the angle of progress correctly
+                withAnimation(.linear(duration: 2)) {
+                    angleOfProgress = -90 + (progress * 360)
+                }
+
+                // Timer countdown logic
+                if minute == 0 && second == 0 {
+                    if !isBreak {
+                        starStage += 1
                     }
+                    isBreak.toggle()
+                    completePomodoro()
+                } else if second > 0 {
+                    second -= 1
+                } else {
+                    minute -= 1
+                    second = 59
                 }
             }
         }
+    }
+
+
     
     func stopTimer() {
             timer?.invalidate()
@@ -118,7 +132,6 @@ struct PomodoroPage: View {
     // 🎯 Pomodoro Tamamlandığında Çalışan Fonksiyon
        func completePomodoro() {
            stopTimer()
-           starStage += 1
            
            if starStage == 4 {
                startLongBreak()
@@ -131,6 +144,8 @@ struct PomodoroPage: View {
        func startShortBreak() {
            minute = 5
            second = 0
+           progressDuration = 5
+           timerRunning = true
            startTimer()
        }
 
@@ -138,6 +153,8 @@ struct PomodoroPage: View {
        func startLongBreak() {
            minute = 15
            second = 0
+           progressDuration = 15
+           timerRunning = true
            startTimer()
        }
     

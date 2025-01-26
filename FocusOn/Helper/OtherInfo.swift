@@ -17,10 +17,10 @@ struct OtherInfo: View {
             ZStack {
                 Rectangle()
                     .fill(Color.white)
-                    .frame(width: 300, height: 110)
+                    .frame(width: 350, height: 250)
                     .cornerRadius(35)
                     .shadow(color: Color.black.opacity(1.0), radius: 40)
-                    .overlay(Text("This is other method").font(.title2).padding(.horizontal, 3.0))
+                    .overlay(Text("The 57/12 technique involves 57 minutes of focused work followed by a 12-minute break, promoting deep concentration and sustained productivity while preventing burnout.").font(.title2).padding(.horizontal, 3.0))
                                         
                     }
             .offset(y: -120)
