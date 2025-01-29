@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct OtherTechniquePage: View {
+struct ThirtyPage: View {
     
     @State private var timer: Timer? = nil
-    @State var minute=52
+    @State var minute=30
     @State var second=0
     @State private var timerRunning = false
     @State var angleOfProgress: Double = -90
-    @State var progressDuration = 52
+    @State var progressDuration = 30
     @State var isBreak = false
     @State var count = 0
     
@@ -120,10 +120,10 @@ struct OtherTechniquePage: View {
         }
     
     func breakTime() {
-        minute = 17
+        minute = 30
         second = 0
         timerRunning = true
-        progressDuration = 17
+        progressDuration = 30
         startTimer()
     }
     
@@ -134,15 +134,15 @@ struct OtherTechniquePage: View {
             breakTime()
         }
         else {
-            minute = 52
+            minute = 30
             second = 0
             timerRunning = true
-            progressDuration = 52
+            progressDuration = 30
             startTimer()
         }
     }
 }
 
 #Preview {
-    OtherTechniquePage()
+    ThirtyPage()
 }
