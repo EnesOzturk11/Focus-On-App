@@ -45,30 +45,30 @@ struct MainPageView: View {
 
                     HStack {
                         NavigationLink(destination: PomodoroPage()) {
-                            Label("Pomodoro", systemImage: "timer") // Use a valid SF Symbol
-                                .padding()
-                                .frame(width: 250, height: 70) // Adjust button size
-                                .background(Color.blue) // Button background color
-                                .foregroundColor(.white) // Text color
-                                .cornerRadius(10) // Rounded corners
-                                .shadow(radius: 5) // Button shadow effect
-                                .font(.headline)
-                                .fontWeight(.bold)
-                            
+                            ZStack {
+                                Capsule()
+                                    .foregroundColor(Color.cyan)
+                                    .frame(width: 250, height: 80)
+                                    .padding(.horizontal)
+                                    .shadow(radius: 10)
+                                
+                                Label("Pomodoro", systemImage: "timer")
+                                    .foregroundColor(Color.white)
+                                    .font(.title)
+                            }
+                        
                         }
                         
                         Button(action: {
                             showPomodoroInfo = true
                         }) {
-                            Image(systemName: "info.circle.fill") // ℹ️ Icon
-                                .resizable() // Allows resizing
-                                .scaledToFit() // Maintains aspect ratio
-                                .frame(width: 30, height: 30) // Icon size
-                                .foregroundColor(.white) // Icon color
-                                .padding() // Adds padding inside the button
-                                .background(Color.blue) // Button background color
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .shadow(radius: 10)
+                                .overlay(Image(systemName: "info.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 30, height: 30))
                         }
                         .popover(isPresented: $showPomodoroInfo) {
                             PomodoroInfo(showPomodoroInfo: $showPomodoroInfo)
@@ -78,28 +78,29 @@ struct MainPageView: View {
                     }
                     HStack {
                         NavigationLink(destination: OtherTechniquePage()) {
-                            Label("57/12 technique" ,systemImage: "timer")
-                                .padding()
-                                .frame(width: 250, height: 70)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
-                                .font(.headline)
-                                .fontWeight(.bold)
+                            ZStack {
+                                Capsule()
+                                    .foregroundColor(Color.cyan)
+                                    .frame(width: 250, height: 80)
+                                    .padding(.horizontal)
+                                    .shadow(radius: 10)
+                                
+                                Label("57/12 Technique", systemImage: "timer")
+                                    .foregroundColor(Color.white)
+                                    .font(.title)
+                            }
+
                         }
                         Button(action: {
                             showOtherInfo = true
                         }) {
-                            Image(systemName: "info.circle.fill") // ℹ️ Icon
-                                .resizable() // Allows resizing
-                                .scaledToFit() // Maintains aspect ratio
-                                .frame(width: 30, height: 30) // Icon size
-                                .foregroundColor(.white) // Icon color
-                                .padding() // Adds padding inside the button
-                                .background(Color.blue) // Button background color
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .shadow(radius: 10)
+                                .overlay(Image(systemName: "info.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 30, height: 30))
                         }
                         .popover(isPresented: $showOtherInfo) {
                             OtherInfo(showOtherInfo: $showOtherInfo)
