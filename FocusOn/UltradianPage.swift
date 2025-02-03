@@ -7,20 +7,16 @@
 
 import SwiftUI
 
-struct OtherTechniquePage: View {
+struct UltradianPage: View {
     
     @State private var timer: Timer? = nil
-
-    @State var minute=52
+    @State var minute=90
     @State var second=0
     @State private var timerRunning = false
     @State var angleOfProgress: Double = -90
-    @State var progressDuration = 52
+    @State var progressDuration = 90
     @State var isBreak = false
     @State var count = 0
-
-   
-
     
     var body: some View {
         ZStack {
@@ -29,14 +25,12 @@ struct OtherTechniquePage: View {
             
             VStack (spacing: -150){
                 
-
                 Text("Session: \(count)")
                     .foregroundColor(Color.primary)
                     .offset(y: -300)
                     .padding(.top)
                     .font(.largeTitle)
                 
-
                 ZStack {
                     Circle()
                         .foregroundColor(.white)
@@ -59,10 +53,8 @@ struct OtherTechniquePage: View {
                         .font(.system(size: 52, weight: .bold))
                     
                 }
-
                 .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
                 
-
                 
                 Button(action: {
                     timerRunning.toggle()// Replace with your desired action
@@ -88,7 +80,6 @@ struct OtherTechniquePage: View {
                 .padding([.leading, .bottom, .trailing], 50.0)
             }
         }
-
     }
     
     func startTimer() {
@@ -129,10 +120,10 @@ struct OtherTechniquePage: View {
         }
     
     func breakTime() {
-        minute = 17
+        minute = 30
         second = 0
         timerRunning = true
-        progressDuration = 17
+        progressDuration = 30
         startTimer()
     }
     
@@ -143,50 +134,15 @@ struct OtherTechniquePage: View {
             breakTime()
         }
         else {
-            minute = 52
+            minute = 90
             second = 0
             timerRunning = true
-            progressDuration = 52
+            progressDuration = 90
             startTimer()
         }
-
     }
-    
-    func startTimer() {
-        timer?.invalidate()  // Stop any existing timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            DispatchQueue.main.async {
-                let totalTime = progressDuration * 60  // Total duration in seconds
-                let timeElapsed = ((progressDuration * 60) - ((minute * 60) + second))
-                let progress = Double(timeElapsed) / Double(totalTime)
-
-                // Animate the angle of progress correctly
-                withAnimation(.linear(duration: 2)) {
-                    angleOfProgress = -90 + (progress * 360)
-                }
-
-                // Timer countdown logic
-                if minute == 0 && second == 0 {
-                    
-                    isBreak.toggle()
-                    stopTimer()
-                } else if second > 0 {
-                    second -= 1
-                } else {
-                    minute -= 1
-                    second = 59
-                }
-            }
-        }
-    }
-    
-    func stopTimer() {
-            timer?.invalidate()
-            timer = nil
-            timerRunning = false
-        }
 }
 
 #Preview {
-    OtherTechniquePage()
+    UltradianPage()
 }
