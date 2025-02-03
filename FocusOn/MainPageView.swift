@@ -46,6 +46,7 @@ struct MainPageView: View {
                             .offset(y: -100)
                     }.offset(y: 90)
 
+
                     VStack (spacing: 30){
                         HStack {
                             NavigationLink(destination: PomodoroPage()) {
@@ -76,6 +77,37 @@ struct MainPageView: View {
                             }
                             .popover(isPresented: $showPomodoroInfo) {
                                 PomodoroInfo(showPomodoroInfo: $showPomodoroInfo)
+
+                    HStack {
+                        NavigationLink(destination: PomodoroPage()) {
+                            ZStack {
+                                Capsule()
+                                    .foregroundColor(Color.cyan)
+                                    .frame(width: 250, height: 80)
+                                    .padding(.horizontal)
+                                    .shadow(radius: 10)
+                                
+                                Label("Pomodoro", systemImage: "timer")
+                                    .foregroundColor(Color.white)
+                                    .font(.title)
+                            }
+                        
+                        }
+                        
+                        Button(action: {
+                            showPomodoroInfo = true
+                        }) {
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .shadow(radius: 10)
+                                .overlay(Image(systemName: "info.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 30, height: 30))
+                        }
+                        .popover(isPresented: $showPomodoroInfo) {
+                            PomodoroInfo(showPomodoroInfo: $showPomodoroInfo)
+
                                 
                             }
                             
@@ -93,6 +125,7 @@ struct MainPageView: View {
                                         .foregroundColor(Color.white)
                                         .font(.title)
                                 }
+
 
                             }
                             Button(action: {
@@ -142,6 +175,34 @@ struct MainPageView: View {
                                 UltradianInfo(showUltradianInfo: $showUltradianInfo)
                                     
                             }
+
+                    }
+                    HStack {
+                        NavigationLink(destination: OtherTechniquePage()) {
+                            ZStack {
+                                Capsule()
+                                    .foregroundColor(Color.cyan)
+                                    .frame(width: 250, height: 80)
+                                    .padding(.horizontal)
+                                    .shadow(radius: 10)
+                                
+                                Label("57/12 Technique", systemImage: "timer")
+                                    .foregroundColor(Color.white)
+                                    .font(.title)
+                            }
+
+                        }
+                        Button(action: {
+                            showOtherInfo = true
+                        }) {
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .shadow(radius: 10)
+                                .overlay(Image(systemName: "info.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 30, height: 30))
+ 
                         }
                         
                         HStack {
